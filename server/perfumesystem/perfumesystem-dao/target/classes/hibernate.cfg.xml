@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="show_sql">true</property>
+		<!-- <property name="hibernate.current_session_context_class"> org.hibernate.context.internal.ThreadLocalSessionContext 
+			</property> -->
+
+		<mapping class="by.grsu.perfumesystem.model.Address" />
+		<mapping class="by.grsu.perfumesystem.model.Brand" />
+		<mapping class="by.grsu.perfumesystem.model.Country" />
+		<mapping class="by.grsu.perfumesystem.model.Note" />
+		<mapping class="by.grsu.perfumesystem.model.NotePyramide" />
+		<mapping class="by.grsu.perfumesystem.model.NoteGroup" />
+		<mapping class="by.grsu.perfumesystem.model.Perfume" />
+		<mapping class="by.grsu.perfumesystem.model.PerfumeCondition" />
+		<mapping class="by.grsu.perfumesystem.model.Shop" />
+		<mapping class="by.grsu.perfumesystem.model.User" />
+		<mapping class="by.grsu.perfumesystem.model.UserInfo" />
+	</session-factory>
+</hibernate-configuration>

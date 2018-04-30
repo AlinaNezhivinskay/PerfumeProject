@@ -1,0 +1,24 @@
+<div *ngIf="brand">
+  <h2>{{ brand.name }}</h2>
+  <div>
+    <label>Name:{{brand.name}}</label><br>
+    <label>Country:{{brand.country.name}}</label><br>
+    <div *ngIf="brand.site">
+       Official site:<a href="{{brand.site}}">{{brand.site}}</a><br>
+    </div>
+  </div>
+  <h3>Perfumes of the brand:</h3>
+  <ul class="perfumes">
+  	<li *ngFor="let perfume of perfumes">
+  		<a routerLink="/detail/{{perfume.id}}">
+        <td>
+          <img src="data:image/jpg;base64,{{perfume.image}}">           
+        </td>
+        <td>
+          <label>{{perfume.name}}</label>   
+        </td>
+		</a>
+  	</li>
+  </ul>
+  <button (click)="goBack()">go back</button>
+</div>

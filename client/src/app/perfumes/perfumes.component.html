@@ -1,0 +1,15 @@
+<h2>Perfumes</h2>
+
+				<ul class="perfumes">
+  					<li *ngFor="let perfume of perfumes">
+  						<a routerLink="/detail/{{perfume.id}}">
+  						<td>
+  							<img src="data:image/jpg;base64,{{perfume.image}}">						
+						  </td>
+              <td>
+                <label>{{perfume.name}}</label>   
+              </td>
+						  </a>
+  					</li>
+				</ul>
+

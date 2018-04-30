@@ -1,0 +1,12 @@
+<h2>Brands</h2>
+
+				<table class="brands">
+  					<td *ngFor="let brand of brands">
+  						<a routerLink="/brand_detail/{{brand.id}}">
+  						<div class="brand_name">
+  							<p>{{brand.name}}</p>   						
+						</div>
+						</a>
+  					</td>
+				</table>
+

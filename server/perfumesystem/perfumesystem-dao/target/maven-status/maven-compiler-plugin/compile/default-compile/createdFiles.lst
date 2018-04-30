@@ -1,0 +1,12 @@
+by\grsu\perfumesystem\dao\UserDAO.class
+by\grsu\perfumesystem\dao\ShopDAO.class
+by\grsu\perfumesystem\dao\UserInfoDAO.class
+by\grsu\perfumesystem\dao\AddressDAO.class
+by\grsu\perfumesystem\dao\NoteDAO.class
+by\grsu\perfumesystem\dao\BrandDAO.class
+by\grsu\perfumesystem\dao\PerfumeDAO.class
+by\grsu\perfumesystem\dao\PerfumeConditionDAO.class
+by\grsu\perfumesystem\dao\NotePyramideDAO.class
+by\grsu\perfumesystem\dao\NoteGroupDAO.class
+by\grsu\perfumesystem\dao\CountryDAO.class
+by\grsu\perfumesystem\dao\AbstractDAO.class
