@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { PerfumeService }  from '../service/perfume.service';
+import { Perfume } from '../entities/perfume';
 
 @Component({
   selector: 'app-perfume-detail',
@@ -10,7 +11,7 @@ import { PerfumeService }  from '../service/perfume.service';
   styleUrls: [ './perfume-detail.component.css' ]
 })
 export class PerfumeDetailComponent implements OnInit {
-  perfume: Object;
+  perfume: Perfume;
 
 
   constructor(

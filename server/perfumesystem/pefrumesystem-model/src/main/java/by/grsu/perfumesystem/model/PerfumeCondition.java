@@ -33,6 +33,12 @@ public class PerfumeCondition {
 
 	}
 
+	public PerfumeCondition(WeatherType weather, Double temperature, Daytime daytime) {
+		this.weather = weather;
+		this.temperature = temperature;
+		this.daytime = daytime;
+	}
+
 	public Integer getId() {
 		return id;
 	}

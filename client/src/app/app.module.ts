@@ -7,6 +7,9 @@ import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
 
+import { PerfumesAdminComponent }   from './perfumes-admin/perfumes-admin.component';
+import { PerfumeAddComponent }   from './perfume-add/perfume-add.component';
+
 import { PerfumesComponent }   from './perfumes/perfumes.component';
 import { PerfumeDetailComponent }   from './perfume-details/perfume-detail.component';
 import { PerfumeService }          from './service/perfume.service';
@@ -14,11 +17,14 @@ import { PerfumeService }          from './service/perfume.service';
 import { BrandService }          from './service/brand.service';
 import { BrandsComponent }   from './brands/brands.component';
 import { BrandDetailComponent }   from './brand-details/brand-detail.component';
+import { BrandAddComponent }   from './brand-add/brand-add.component';
 
 import { NoteService }          from './service/note.service';
 import { NotesComponent }   from './notes/notes.component';
 
 import { NoteGroupService }          from './service/note-group.service';
+
+import { CountryService }          from './service/country.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,10 @@ import { NoteGroupService }          from './service/note-group.service';
     PerfumeDetailComponent,
     BrandsComponent,
     BrandDetailComponent,
-    NotesComponent
+    NotesComponent,
+    PerfumesAdminComponent,
+    PerfumeAddComponent,
+    BrandAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +44,7 @@ import { NoteGroupService }          from './service/note-group.service';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [PerfumeService, BrandService, NoteService, NoteGroupService],
+  providers: [PerfumeService, BrandService, NoteService, NoteGroupService,CountryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

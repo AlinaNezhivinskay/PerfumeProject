@@ -37,6 +37,12 @@ public class Brand {
 
 	}
 
+	public Brand(String name, Country country, String site) {
+		this.name = name;
+		this.country = country;
+		this.site = site;
+	}
+
 	public Integer getId() {
 		return id;
 	}

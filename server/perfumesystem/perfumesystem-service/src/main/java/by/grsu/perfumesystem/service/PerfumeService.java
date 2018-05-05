@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import by.grsu.perfumesystem.api.dao.IPerfumeConditionDAO;
 import by.grsu.perfumesystem.api.dao.IPerfumeDAO;
 import by.grsu.perfumesystem.api.sevice.IPerfumeService;
 import by.grsu.perfumesystem.model.Perfume;
@@ -17,13 +18,17 @@ public class PerfumeService implements IPerfumeService {
 	@Autowired
 	private IPerfumeDAO perfumeDAO;
 
+	@Autowired
+	private IPerfumeConditionDAO perfumeConditionDAO;
+
 	public void addPerfume(Perfume perfume) throws Exception {
+		perfumeConditionDAO.create(perfume.getCondition());
 		perfumeDAO.create(perfume);
 	}
 
-	public void removePerfume(Perfume perfume) throws Exception {
+	public void removePerfume(Integer id) throws Exception {
+		Perfume perfume = perfumeDAO.getById(id);
 		perfumeDAO.delete(perfume);
-
 	}
 
 	public void updatePerfume(Perfume perfume) throws Exception {

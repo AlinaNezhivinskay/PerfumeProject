@@ -30,9 +30,9 @@ export class BrandService {
   }
   
   /** POST: add a new perfume to the server */
-  addBrand (brand: Object): Observable<Object> {
+  addBrand (brand: Object): void {
     const url = this.brandUrl+'/new';
-    return this.http.post<Object>(url, brand, httpOptions);
+    this.http.post(url, brand, httpOptions).subscribe();
   }
 
   /** DELETE: delete the hero from the server */

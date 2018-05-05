@@ -1,7 +1,5 @@
 package by.grsu.perfumesystem.web.dto;
 
-import java.util.Base64;
-
 import by.grsu.perfumesystem.model.Brand;
 import by.grsu.perfumesystem.model.PerfumeCondition;
 import by.grsu.perfumesystem.model.util.PerfumeType;
@@ -49,17 +47,8 @@ public class PerfumeDto {
 		return image;
 	}
 
-	public void setImage(Byte[] image) {
-		if (image == null) {
-			this.image = null;
-			return;
-		}
-		byte[] bytes = new byte[image.length];
-		int i = 0;
-		for (Byte b : image)
-			bytes[i++] = b.byteValue();
-		String imageStr = Base64.getEncoder().encodeToString(bytes);
-		this.image = imageStr;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public PerfumeType getType() {

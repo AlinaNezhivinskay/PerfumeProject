@@ -4,12 +4,12 @@ import { PerfumeService } from '../service/perfume.service';
 import { Perfume } from '../entities/perfume';
 
 @Component({
-  selector: 'app-perfumes',
-  templateUrl: './perfumes.component.html',
-  styleUrls: ['./perfumes.component.css']
+  selector: 'app-perfumes-admin',
+  templateUrl: './perfumes-admin.component.html',
+  styleUrls: ['./perfumes-admin.component.css']
 })
-export class PerfumesComponent {
-  perfumes: Object[];
+export class PerfumesAdminComponent {
+  perfumes: Perfume[];
 
   constructor(private perfumeService: PerfumeService) { }
 
@@ -20,5 +20,9 @@ export class PerfumesComponent {
   getPerfumes(): void {
     this.perfumeService.getPerfumes()
     .subscribe(perfumes => this.perfumes = perfumes);
+  }
+
+  delete(id: number): void {
+    this.perfumeService.deletePerfume({ id } as Perfume);
   }
 }

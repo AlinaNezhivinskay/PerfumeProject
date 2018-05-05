@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { Perfume } from '../entities/perfume';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,40 +20,39 @@ export class PerfumeService {
     private http: HttpClient) { }
 
   /** GET perfumes from the server */
-  getPerfumes (): Observable<Object[]> {
+  getPerfumes (): Observable<Perfume[]> {
      const url = this.perfumeUrl+'/all';
-    return this.http.get<Object[]>(url);
+    return this.http.get<Perfume[]>(url);
   }
 
   /** GET perfume by id*/
-  getPerfume(id: number): Observable<Object> {
+  getPerfume(id: number): Observable<Perfume> {
     const url = this.perfumeUrl+'/find/?id='+id;
-    return this.http.get<Object>(url);
+    return this.http.get<Perfume>(url);
   }
 
 /** GET perfume by id*/
-  getPerfumesByBrand(id: number): Observable<Object[]> {
+  getPerfumesByBrand(id: number): Observable<Perfume[]> {
     const url = this.perfumeUrl+'/by_brand/?id='+id;
-    return this.http.get<Object[]>(url);
+    return this.http.get<Perfume[]>(url);
   }
 
   /** POST: add a new perfume to the server */
-  addPerfume (perfume: Object): Observable<Object> {
+  addPerfume (perfume: Object): void {
     const url = this.perfumeUrl+'/new';
-    return this.http.post<Object>(url, perfume, httpOptions);
+    this.http.post(url, perfume, httpOptions).subscribe();
   }
 
   /** DELETE: delete the hero from the server */
-  deletePerfume (id: number): Observable<Object> {
+  deletePerfume (perfume: Perfume): void {
     const url = this.perfumeUrl+'/remove';
-
-    return this.http.post<Number>(url,id, httpOptions);
+    this.http.post(url,perfume, httpOptions).subscribe();
   }
 
   /** PUT: update the hero on the server */
-  updatePerfume (perfume: Object): Observable<any> {
+  updatePerfume (perfume: Perfume): Observable<any> {
      const url = this.perfumeUrl+'/update';
-    return this.http.post<Object>(url, perfume, httpOptions);
+    return this.http.post<Perfume>(url, perfume, httpOptions);
   }
 
   /**

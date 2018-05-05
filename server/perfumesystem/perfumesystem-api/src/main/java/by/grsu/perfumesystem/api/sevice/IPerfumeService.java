@@ -8,7 +8,7 @@ public interface IPerfumeService {
 
 	void addPerfume(Perfume perfume) throws Exception;
 
-	void removePerfume(Perfume perfume) throws Exception;
+	void removePerfume(Integer id) throws Exception;
 
 	void updatePerfume(Perfume perfume) throws Exception;
 

@@ -1,7 +1,11 @@
 by\grsu\perfumesystem\web\dto\NoteDto.class
 by\grsu\perfumesystem\web\controller\NoteController.class
 by\grsu\perfumesystem\web\dto\PerfumeDto.class
+by\grsu\perfumesystem\web\controller\CountryController.class
 by\grsu\perfumesystem\web\objectmapper\HibernateAwareObjectMapper.class
 by\grsu\perfumesystem\web\controller\NoteGroupController.class
 by\grsu\perfumesystem\web\controller\PerfumeController.class
+by\grsu\perfumesystem\web\dto\BrandDto.class
+by\grsu\perfumesystem\web\dto\AddPerfumeDto.class
 by\grsu\perfumesystem\web\controller\BrandController.class
+by\grsu\perfumesystem\web\util\ImageConverter.class

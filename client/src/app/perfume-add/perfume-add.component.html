@@ -1,0 +1,52 @@
+<div>
+	<h2>Adding perfume</h2>
+	<form (ngSubmit)="addPerfume()" #perfumeForm="ngForm">
+	<table>
+		<tr>
+			<td class="perfume-image">
+				<img #image alt=""  width="250" height="250" class="image" (image.nativeElement.src)="perfume.image"><br>
+				<input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/jpg" (change)="imageChoosed($event)" >
+			</td>
+			<td>
+      			<label>Name:</label><input type="text" name="name" required="true" [(ngModel)]="perfume.name"><br>
+	    		<label>Release year:</label><input type="number" name="releaseYear" [(ngModel)]="perfume.releaseYear"><br>
+   				<label>Type:</label>
+   				<select name="type" required [(ngModel)]="perfume.type">
+   					<option value="FEMALE">Female</option>
+   					<option value="MALE">Male</option>
+   					<option value="UNISEX">Unisex</option>
+   				</select><br>
+    			<label>Brand:</label>
+    			<select name="brand" required [(ngModel)]="perfume.brand">
+   					<option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+   				</select>
+    			<br>
+			</td>
+		</tr>
+		<h2>Recommendations:</h2>
+		<tr>
+			<td class="condition">
+				<p>This perfume is most suitable under the following conditions:</p>
+				<img src="./assets/weather.jpg" class="icon">
+				<label>Weather condition:</label>
+				<select name="weather" required [(ngModel)]="perfume.weather">
+   					<option value="CLEAR">Clear</option>
+   					<option value="OVERCAST">Overcast</option>
+   					<option value="PRECIPITATION">Precipitation</option>
+   					<option value="ANY">Any</option>
+   				</select><br>
+				<img src="./assets/temperatura.jpg" class="icon">
+				<label>Temperature:</label><input type="number" name="releaseYear" min="-30" max="30" [(ngModel)]="perfume.temperature"><br>
+				<img src="./assets/daytime.jpg" class="icon">
+    			<label>Daytime:</label>
+    			<select name="daytime" required [(ngModel)]="perfume.daytime">
+   					<option value="DAY">Day</option>
+   					<option value="EVENING">Evening</option>
+   					<option value="ANY">Any</option>
+   				</select><br>
+    		</td>
+		</tr>
+	</table>
+	<button type="submit">Add</button>
+	</form>
+</div>
