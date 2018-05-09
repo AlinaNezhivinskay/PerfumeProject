@@ -1,5 +1,9 @@
+<div *ngIf="role=='admin'; then admin else user"></div>
+<ng-template #admin>
 <h2>Brands</h2>
-    <a routerLink="/brand/add">+</a>
+   <div class="row" style="width: 100%; padding-bottom: 1%;">
+    <a href="#" data-target="#addBrandModal" data-toggle="modal"><button type="button" class="btn btn-outline-dark">+</button></a>
+</div>
 				<table class="brands">
   					<td *ngFor="let brand of brands">
   						<a routerLink="/brand_detail/{{brand.id}}">
@@ -7,6 +11,66 @@
   							<p>{{brand.name}}</p>   						
 						</div>
 						</a>
+            <button class="delete" title="delete"
+              (click)="delete(brand)">x</button> 
   					</td>
 				</table>
-
+        <div id="addBrandModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h1 class="text-center" style="color: black;">Add brand</h1>
+              </div>
+              <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label col-lg-6 label-modal">Name:</label>
+                            <div class="col-lg-6">
+                               <input type="text" name="name" [(ngModel)]="brand.name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label col-lg-6 label-modal">Country:</label>
+                            <div class="col-lg-6">
+                                  <select name="country" required [(ngModel)]="brand.country">
+                                    <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    <div class="form-group">
+                    <label  class="control-label col-lg-6 label-modal">Official site:</label>
+                            <div class="col-lg-6">
+                                <input type="url" name="site" [(ngModel)]="brand.site">
+                            </div>
+                          </div>
+                        </div>
+                   <div class="col-sm-12">
+                        <button class="btn btn-lg btn-secondary btn-block" data-dismiss="modal" aria-hidden="true"(click)="addBrand()">Add</button>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                  <div class="col-md-12">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  </div>    
+              </div>
+          </div>
+          </div>
+        </div>
+</ng-template>
+<ng-template #user>
+<h2>Brands</h2>
+        <table class="brands">
+            <td *ngFor="let brand of brands">
+              <a routerLink="/brand_detail/{{brand.id}}">
+              <div class="brand_name">
+                <p>{{brand.name}}</p>               
+            </div>
+            </a>
+            </td>
+        </table>
+</ng-template>

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import by.grsu.perfumesystem.model.util.PerfumePyramideType;
 
 @Entity
@@ -21,6 +23,7 @@ public class NotePyramide {
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "perfume_id", nullable = false)
 	private Perfume perfume;

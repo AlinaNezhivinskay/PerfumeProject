@@ -1,0 +1,38 @@
+<h2>Notes</h2>
+<h3>Choose notes that you like</h3>
+<table class="notes">
+	 <td  *ngFor="let chosenNote of chosenNotes">
+	  <a (click)="cancelChosenNote(chosenNote)">
+     	<img src="data:image/jpg;base64,{{chosenNote.image}}">
+     	<p>{{chosenNote.name}}</p> 
+     </a>
+  </td>
+</table>
+<button (click)="findByNotes()">Find</button>
+<button (click)="cancel()">Cancel</button>
+<table *ngFor="let noteGroup of noteGroups" class="notes">
+  <h3>{{noteGroup.name}}</h3>
+  <label *ngFor="let note of notes">
+     <td  *ngIf="note.group.id==noteGroup.id">
+     	<a (click)="chooseNote(note)">
+     		<img src="data:image/jpg;base64,{{note.image}}">
+     		<p>{{note.name}}</p> 
+     	</a>      
+  </td>
+  </label>
+ 
+</table>
+
+ <h2>Perfumes</h2>
+        <ul class="perfumes">
+            <li *ngFor="let perfume of perfumes">
+              <a routerLink="/detail/{{perfume.id}}">
+              <td>
+                <img src="data:image/jpg;base64,{{perfume.image}}">           
+              </td>
+              <td>
+                <label>{{perfume.name}}</label>   
+              </td>
+              </a>
+            </li>
+        </ul>

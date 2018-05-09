@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Perfume } from '../entities/perfume';
+import { Note } from '../entities/note';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -37,8 +38,18 @@ export class PerfumeService {
     return this.http.get<Perfume[]>(url);
   }
 
+  getPerfumesByNote(id: number): Observable<Perfume[]> {
+    const url = this.perfumeUrl+'/by_note/?id='+id;
+    return this.http.get<Perfume[]>(url);
+  }
+
+  getPerfumesByNotes(notes:Note[]): Observable<Perfume[]> {
+    const url = this.perfumeUrl+'/by_notes';
+    return this.http.post<Perfume[]>(url, notes, httpOptions);
+  }
+
   /** POST: add a new perfume to the server */
-  addPerfume (perfume: Object): void {
+  addPerfume (perfume: Perfume): void {
     const url = this.perfumeUrl+'/new';
     this.http.post(url, perfume, httpOptions).subscribe();
   }

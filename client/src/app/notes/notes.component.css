@@ -24,10 +24,14 @@ color: #DCC24B;
 background: #FEFEFE;
 border-radius: 50%;
 }
-.notes li:hover {
+.notes td:hover {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     padding: 10px;
 }
 a{
 	text-decoration: none;
+}
+img{
+	height: 50px;
+	width: 50px;
 }

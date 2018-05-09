@@ -1,6 +1,7 @@
 .perfumes{
 margin-left: 0;
 list-style: none;
+counter-reset: li;
 }
 .perfumes li {
 position: relative;

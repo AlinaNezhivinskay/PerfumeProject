@@ -29,6 +29,11 @@ public class Note {
 
 	}
 
+	public Note(String name, NoteGroup group) {
+		this.name = name;
+		this.group = group;
+	}
+
 	public Integer getId() {
 		return id;
 	}

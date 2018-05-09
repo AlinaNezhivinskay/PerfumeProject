@@ -1,15 +1,34 @@
-<h2>Perfumes</h2>
-
-				<ul class="perfumes">
-  					<li *ngFor="let perfume of perfumes">
-  						<a routerLink="/detail/{{perfume.id}}">
-  						<td>
-  							<img src="data:image/jpg;base64,{{perfume.image}}">						
-						  </td>
+<div *ngIf="role=='admin'; then admin else user"></div>
+<ng-template #admin>
+  <h2>Perfumes</h2>
+        <ul class="perfumes">
+          <a routerLink="/perfume/add">+</a>
+            <li *ngFor="let perfume of perfumes">
+              <a routerLink="/detail/{{perfume.id}}">
+              <td>
+                <img src="data:image/jpg;base64,{{perfume.image}}">           
+              </td>
               <td>
                 <label>{{perfume.name}}</label>   
               </td>
-						  </a>
-  					</li>
-				</ul>
-
+              </a>
+              <button class="delete" title="delete"
+              (click)="delete(perfume)">x</button>
+            </li>
+        </ul>
+</ng-template>
+<ng-template #user> 
+  <h2>Perfumes</h2>
+        <ul class="perfumes">
+            <li *ngFor="let perfume of perfumes">
+              <a routerLink="/detail/{{perfume.id}}">
+              <td>
+                <img src="data:image/jpg;base64,{{perfume.image}}">           
+              </td>
+              <td>
+                <label>{{perfume.name}}</label>   
+              </td>
+              </a>
+            </li>
+        </ul>
+</ng-template>

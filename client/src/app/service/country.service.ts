@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { Country } from '../entities/country';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,31 +20,32 @@ export class CountryService {
     private http: HttpClient) { }
 
   /** GET perfumes from the server */
-  getCountries (): Observable<Object[]> {
+  getCountries (): Observable<Country[]> {
      const url = this.countryUrl+'/all';
-    return this.http.get<Object[]>(url);
+    return this.http.get<Country[]>(url);
   }
 
   /** GET perfume by id*/
-  getCountry(id: number): Observable<Object> {
+  getCountry(id: number): Observable<Country> {
     const url = this.countryUrl+'/find/?id='+id;
-    return this.http.get<Object>(url);
+    return this.http.get<Country>(url);
   }
   
   /** POST: add a new perfume to the server */
-  addCountry (country: Object): Observable<Object> {
+  addCountry (country: Country): Observable<Country> {
     const url = this.countryUrl+'/new';
-    return this.http.post<Object>(url, country, httpOptions);
+    return this.http.post<Country>(url, country, httpOptions);
   }
 
   /** DELETE: delete the hero from the server */
-  deleteCountry (id: number): Observable<Object> {
+  deleteCountry (country: Country): Observable<Country> {
     const url = this.countryUrl+'/remove';
-    return this.http.post<Number>(url,id, httpOptions);
+    return this.http.post<Country>(url,country, httpOptions);
   }
 
   /** PUT: update the hero on the server */
-  updateCountry (country: Object): Observable<any> {
+  updateCountry (country: Country): Observable<Country> {
      const url = this.countryUrl+'/update';
-    return this.http.post<Object>(url, country, httpOptions);
+    return this.http.post<Country>(url, country, httpOptions);
   }
+}

@@ -1,0 +1,14 @@
+<div *ngIf="country">
+  <h2>{{ country.name }}</h2>
+  <h3>Brands of the country:</h3>
+  <ul class="brands">
+  	<li *ngFor="let brand of brands">
+  		<a routerLink="/brand_detail/{{brand.id}}">
+        <td>
+          <label>{{brand.name}}</label>   
+        </td>
+		</a>
+  	</li>
+  </ul>
+  <button (click)="goBack()">go back</button>
+</div>

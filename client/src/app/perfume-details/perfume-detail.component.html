@@ -1,3 +1,5 @@
+<div *ngIf="role=='admin'; then admin else user"></div>
+<ng-template #admin>
 <div *ngIf="perfume">
 	<h2>{{ perfume.name}}</h2>
 	<table>
@@ -26,5 +28,100 @@
     			<label>Daytime:{{perfume.condition.daytime}}</label><br>
     		</td>
 		</tr>
+		<h2>Note Pyramide:</h2>
+		<tr>
+			<td>
+			<table>
+				<h3>TOP</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='TOP'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">             
+    		 			</td>
+					</label>
+				</tr>
+				<h3>HEART NOTES</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='HEART_NOTE'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">             
+    		 			</td>
+					</label>
+				</tr>
+				<h3>BASIC</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='BASIC'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">          
+    		 			</td>
+					</label>
+				</tr>
+			</table>
+			</td>
+		</tr>
 	</table>
 </div>
+</ng-template>
+<ng-template #user>
+	<div *ngIf="perfume">
+	<h2>{{ perfume.name}}</h2>
+	<table>
+		<tr>
+			<td class="perfume-image">
+				<img src="data:image/png;base64,{{perfume.image}}"  class="image">
+			</td>
+			<td>
+      			<label>Name:{{perfume.name}}</label><br>
+	    		<label>Release year:{{perfume.releaseYear}}</label><br>
+   				<label>Type:{{perfume.type}}</label><br>
+    			<label>Brand:{{perfume.brand.name}}</label><br>
+			</td>
+		</tr>
+		<h2>Recommendations:</h2>
+		<tr>
+			<td class="condition">
+				<p>This perfume is most suitable under the following conditions:</p>
+				<img src="./assets/weather.jpg" class="icon">
+				<label>Weather condition:{{perfume.condition.weather}}</label><br>
+				<div *ngIf="perfume.condition.temperature">
+					<img src="./assets/temperatura.jpg" class="icon">
+					<label>Temperature:{{perfume.condition.temperature}}C</label><br>
+				</div>
+				<img src="./assets/daytime.jpg" class="icon">
+    			<label>Daytime:{{perfume.condition.daytime}}</label><br>
+    		</td>
+		</tr>
+		<h2>Note Pyramide:</h2>
+		<tr>
+			<td>
+			<table>
+				<h3>TOP</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='TOP'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">             
+    		 			</td>
+					</label>
+				</tr>
+				<h3>HEART NOTES</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='HEART_NOTE'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">             
+    		 			</td>
+					</label>
+				</tr>
+				<h3>BASIC</h3>
+				<tr>
+					<label *ngFor="let pyramide of perfume.notePyramide">
+						<td *ngIf="pyramide.type=='BASIC'">
+     						<img src="data:image/jpg;base64,{{pyramide.note.image}}" alt="note" title="{{pyramide.note.name}}">          
+    		 			</td>
+					</label>
+				</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+</div>
+</ng-template>

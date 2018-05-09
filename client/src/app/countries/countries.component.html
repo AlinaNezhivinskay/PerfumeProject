@@ -1,0 +1,58 @@
+<div *ngIf="role=='admin'; then admin else user"></div>
+<ng-template #admin>
+<h2>Countries</h2>
+   <div class="row" style="width: 100%; padding-bottom: 1%;">
+    <a href="#" data-target="#addCountryModal" data-toggle="modal"><button type="button" class="btn btn-outline-dark">+</button></a>
+</div>
+				<table class="countries">
+  					<td *ngFor="let countr of countries">
+  						<a routerLink="/country_detail/{{countr.id}}">
+  						<div class="country_name">
+  							<p>{{countr.name}}</p>   						
+						</div>
+						</a>
+            <button class="delete" title="delete"
+              (click)="delete(countr)">x</button> 
+  					</td>
+				</table>
+        <div id="addCountryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h1 class="text-center" style="color: black;">Add country</h1>
+              </div>
+              <div class="modal-body row">
+                    <div class="col-sm-12">
+                    <div class="form-group">
+                    <label  class="control-label col-lg-6 label-modal">Name:</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="site" [(ngModel)]="country.name">
+                            </div>
+                          </div>
+                        </div>
+                   <div class="col-sm-12">
+                        <button class="btn btn-lg btn-secondary btn-block" data-dismiss="modal" aria-hidden="true"(click)="addCountry()">Add</button>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                  <div class="col-md-12">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  </div>    
+              </div>
+          </div>
+          </div>
+        </div>
+</ng-template>
+<ng-template #user>
+<h2>Countries</h2>
+        <table class="countries">
+            <td *ngFor="let countr of countries">
+              <a routerLink="/country_detail/{{countr.id}}">
+              <div class="country_name">
+                <p>{{countr.name}}</p>              
+            </div>
+            </a>
+            </td>
+        </table>
+</ng-template>

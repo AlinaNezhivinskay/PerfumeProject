@@ -38,4 +38,8 @@ public class BrandService implements IBrandService {
 		return brand;
 	}
 
+	public List<Brand> getBrandsByCountry(Integer countryId) throws Exception {
+		return brandDAO.getBrandsByCountry(countryId);
+	}
+
 }

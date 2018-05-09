@@ -1,5 +1,8 @@
 package by.grsu.perfumesystem.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import by.grsu.perfumesystem.model.util.PerfumeType;
 
@@ -39,8 +45,22 @@ public class Perfume {
 	@JoinColumn(name = "condition_id")
 	private PerfumeCondition condition;
 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "perfume")
+	private List<NotePyramide> notes = new ArrayList<NotePyramide>();
+
 	public Perfume() {
 
+	}
+
+	public Perfume(String name, PerfumeType type, Brand brand, Integer releaseYear, PerfumeCondition condition,
+			List<NotePyramide> notes) {
+		this.name = name;
+		this.type = type;
+		this.brand = brand;
+		this.releaseYear = releaseYear;
+		this.condition = condition;
+		this.notes = notes;
 	}
 
 	public Integer getId() {
@@ -97,6 +117,18 @@ public class Perfume {
 
 	public void setCondition(PerfumeCondition condition) {
 		this.condition = condition;
+	}
+
+	public List<NotePyramide> getNotePyramide() {
+		return notes;
+	}
+
+	public void setNotePyramide(List<NotePyramide> notes) {
+		this.notes = notes;
+	}
+
+	public void addNotePyramid(NotePyramide note) {
+		this.notes.add(note);
 	}
 
 }

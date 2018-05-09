@@ -1,0 +1,39 @@
+.countries{
+margin-left: 0;
+list-style: none;
+counter-reset: li;
+}
+.countries td {
+position: relative;
+margin-bottom: 1.5em;
+border: 3px solid #D8BFD8;
+padding: 0.6em;
+border-radius: 4px;
+background: #FEFEFE;
+color: #231F20;
+font-family: "Trebuchet MS", "Lucida Sans";
+}
+.countries td:before {
+position: absolute;
+top: -0.7em;
+padding-left: 0.4em;
+padding-right: 0.4em;
+font-size: 16px;
+font-weight: bold;
+color: #DCC24B;
+background: #FEFEFE;
+border-radius: 50%;
+}
+
+.countries td:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+a{
+	text-decoration: none;
+}
+.country_name{
+	text-align: center;
+	height: 50px;
+	width: 70px;
+}

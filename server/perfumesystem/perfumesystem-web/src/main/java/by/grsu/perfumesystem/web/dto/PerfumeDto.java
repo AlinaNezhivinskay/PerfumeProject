@@ -1,6 +1,10 @@
 package by.grsu.perfumesystem.web.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import by.grsu.perfumesystem.model.Brand;
+import by.grsu.perfumesystem.model.NotePyramide;
 import by.grsu.perfumesystem.model.PerfumeCondition;
 import by.grsu.perfumesystem.model.util.PerfumeType;
 
@@ -12,6 +16,9 @@ public class PerfumeDto {
 	private Brand brand;
 	private Integer releaseYear;
 	private PerfumeCondition condition;
+	private List<NotePyramide> notes = new ArrayList<NotePyramide>();
+
+	private List<NotePyramide> notePyramide;
 
 	public PerfumeDto() {
 
@@ -81,6 +88,22 @@ public class PerfumeDto {
 
 	public void setCondition(PerfumeCondition condition) {
 		this.condition = condition;
+	}
+
+	public List<NotePyramide> getNotePyramide() {
+		return notePyramide;
+	}
+
+	public void setNotePyramide(List<NotePyramide> notePyramide) {
+		this.notePyramide = notePyramide;
+	}
+
+	public List<NotePyramide> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<NotePyramide> notes) {
+		this.notes = notes;
 	}
 
 }

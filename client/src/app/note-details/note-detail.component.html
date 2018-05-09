@@ -1,0 +1,19 @@
+<div *ngIf="note">
+  <h2>{{ note.name }}</h2>
+  <div>
+    <img src="data:image/jpg;base64,{{note.image}}"><br>
+  <h3>Perfumes of the note:</h3>
+  <ul class="perfumes">
+  	<li *ngFor="let perfume of perfumes">
+  		<a routerLink="/detail/{{perfume.id}}">
+        <td>
+          <img src="data:image/jpg;base64,{{perfume.image}}">           
+        </td>
+        <td>
+          <label>{{perfume.name}}</label>   
+        </td>
+		</a>
+  	</li>
+  </ul>
+  <button (click)="goBack()">go back</button>
+</div>

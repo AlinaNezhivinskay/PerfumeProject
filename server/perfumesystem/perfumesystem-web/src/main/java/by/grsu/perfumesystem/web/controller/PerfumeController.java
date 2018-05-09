@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import by.grsu.perfumesystem.api.sevice.IBrandService;
 import by.grsu.perfumesystem.api.sevice.IPerfumeService;
+import by.grsu.perfumesystem.model.Note;
 import by.grsu.perfumesystem.model.Perfume;
-import by.grsu.perfumesystem.web.dto.AddPerfumeDto;
 import by.grsu.perfumesystem.web.dto.PerfumeDto;
 import by.grsu.perfumesystem.web.util.ImageConverter;
 
@@ -24,9 +23,6 @@ public class PerfumeController {
 
 	@Autowired
 	private IPerfumeService perfumeService;
-
-	@Autowired
-	private IBrandService brandService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<PerfumeDto> getPerfumes() {
@@ -74,24 +70,32 @@ public class PerfumeController {
 		return answer;
 	}
 
+	@RequestMapping(value = "/by_note", method = RequestMethod.GET)
+	public List<PerfumeDto> getPerfumesByNote(@RequestParam Integer id) {
+		List<PerfumeDto> answer = null;
+		try {
+			answer = new ArrayList<PerfumeDto>();
+			List<Perfume> perfumes = perfumeService.getPerfumesByNote(id);
+			for (Perfume perfume : perfumes) {
+				PerfumeDto dto = convertToDto(perfume);
+				answer.add(dto);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public void addPerfume(@RequestBody AddPerfumeDto dto) {
+	public void addPerfume(@RequestBody PerfumeDto dto) {
 		try {
-			/*
-			 * Perfume perfume = new Perfume(); perfume.setName(dto.getName());
-			 * perfume.setImage(ImageConverter.convertToByte(dto.getImage()));
-			 * perfume.setReleaseYear(dto.getReleaseYear()); perfume.setType(dto.getType());
-			 * 
-			 * PerfumeCondition condition = new PerfumeCondition(dto.getWeather(),
-			 * dto.getTemperature(), dto.getDaytime()); Brand brand =
-			 * brandService.getBrandById(dto.getBrand());
-			 * 
-			 * perfume.setCondition(condition); perfume.setBrand(brand);
-			 * 
-			 * perfumeService.addPerfume(perfume);
-			 */
-			dto.getImage();
+
+			Perfume perfume = new Perfume(dto.getName(), dto.getType(), dto.getBrand(), dto.getReleaseYear(),
+					dto.getCondition(), dto.getNotePyramide());
+			perfume.setImage(ImageConverter.convertToByte(dto.getImage()));
+			perfumeService.addPerfume(perfume);
 		} catch (Exception e) {
 
 			System.out.print(e.getMessage());
@@ -102,7 +106,35 @@ public class PerfumeController {
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public void removePerfume(@RequestBody Perfume perfume) {
 		try {
-			perfumeService.removePerfume(perfume.getId());
+			perfumeService.removePerfume(perfume);
+		} catch (Exception e) {
+
+			System.out.print(e.getMessage());
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void updatePerfume(@RequestBody Perfume perfume) {
+		try {
+			perfumeService.updatePerfume(perfume);
+		} catch (Exception e) {
+
+			System.out.print(e.getMessage());
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/by_notes", method = RequestMethod.POST)
+	public void getPerfumesByNotes(@RequestBody List<Note> notes) {
+		List<PerfumeDto> answer = null;
+		try {
+			answer = new ArrayList<PerfumeDto>();
+			List<Perfume> perfumes = perfumeService.getPerfumesByNotes(notes);
+			for (Perfume perfume : perfumes) {
+				PerfumeDto dto = convertToDto(perfume);
+				answer.add(dto);
+			}
 		} catch (Exception e) {
 
 			System.out.print(e.getMessage());
@@ -113,6 +145,7 @@ public class PerfumeController {
 		PerfumeDto dto = new PerfumeDto(perfume.getId(), perfume.getName(), perfume.getType(), perfume.getBrand(),
 				perfume.getReleaseYear(), perfume.getCondition());
 		dto.setImage(ImageConverter.convertToString(perfume.getImage()));
+		dto.setNotePyramide(perfume.getNotePyramide());
 		return dto;
 	}
 }

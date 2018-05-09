@@ -16,5 +16,5 @@ public interface IBrandService {
 
 	Brand getBrandById(Integer id) throws Exception;
 
-
+	List<Brand> getBrandsByCountry(Integer countryId) throws Exception;
 }

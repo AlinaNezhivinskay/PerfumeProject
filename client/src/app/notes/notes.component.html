@@ -1,13 +1,83 @@
+<div *ngIf="role=='admin'; then admin else user"></div>
+<ng-template #admin>
+<h2>Notes</h2>
+<div class="row" style="width: 100%; padding-bottom: 1%;">
+    <a href="#" data-target="#addNoteModal" data-toggle="modal"><button type="button" class="btn btn-outline-dark">+</button></a>
+</div>
+<table *ngFor="let noteGroup of noteGroups" class="notes">
+  <h3>{{noteGroup.name}}</h3>
+  <label *ngFor="let note of notes">
+     <td  *ngIf="note.group.id==noteGroup.id">
+      <a routerLink="/note_detail/{{note.id}}">
+      <img src="data:image/jpg;base64,{{note.image}}">
+      <p>{{note.name}}</p>   
+      </a>   
+      <button class="delete" title="delete"
+              (click)="delete(note)">x</button>        
+  </td>
+  </label>
+ 
+</table>
+<div id="addNoteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h1 class="text-center" style="color: black;">Add note</h1>
+              </div>
+              <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label col-lg-6 label-modal">Image:</label>
+                            <div class="col-lg-6">
+                               <img #image alt=""  width="250" height="250" class="image"><br>
+                               <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/jpg" (change)="imageChoosed($event)" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label col-lg-6 label-modal">Note group:</label>
+                            <div class="col-lg-6">
+                                 <select name="noteGroup" required [(ngModel)]="perfumeNote.group">
+                                  <option *ngFor="let group of noteGroups" [ngValue]="group">{{group.name}}</option>
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    <div class="form-group">
+                    <label  class="control-label col-lg-6 label-modal">Name:</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="name" [(ngModel)]="perfumeNote.name">
+                            </div>
+                          </div>
+                        </div>
+                   <div class="col-sm-12">
+                        <button class="btn btn-lg btn-secondary btn-block" data-dismiss="modal" aria-hidden="true"(click)="addNote()">Add</button>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                  <div class="col-md-12">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  </div>    
+              </div>
+          </div>
+          </div>
+        </div>
+</ng-template>
+<ng-template #user>
 <h2>Notes</h2>
 <table *ngFor="let noteGroup of noteGroups" class="notes">
   <h3>{{noteGroup.name}}</h3>
   <label *ngFor="let note of notes">
      <td  *ngIf="note.group.id==noteGroup.id">
-    <div>
+      <a routerLink="/note_detail/{{note.id}}">
       <img src="data:image/jpg;base64,{{note.image}}">
-      <p>{{note.name}}</p>              
-      </div>
+      <p>{{note.name}}</p>   
+      </a>           
   </td>
   </label>
  
 </table>
+</ng-template>

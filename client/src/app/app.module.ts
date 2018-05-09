@@ -7,7 +7,6 @@ import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
 
-import { PerfumesAdminComponent }   from './perfumes-admin/perfumes-admin.component';
 import { PerfumeAddComponent }   from './perfume-add/perfume-add.component';
 
 import { PerfumesComponent }   from './perfumes/perfumes.component';
@@ -17,14 +16,20 @@ import { PerfumeService }          from './service/perfume.service';
 import { BrandService }          from './service/brand.service';
 import { BrandsComponent }   from './brands/brands.component';
 import { BrandDetailComponent }   from './brand-details/brand-detail.component';
-import { BrandAddComponent }   from './brand-add/brand-add.component';
 
 import { NoteService }          from './service/note.service';
 import { NotesComponent }   from './notes/notes.component';
+import { NoteDetailComponent }   from './note-details/note-detail.component';
 
 import { NoteGroupService }          from './service/note-group.service';
 
 import { CountryService }          from './service/country.service';
+import { CountriesComponent }   from './countries/countries.component';
+import { CountryDetailComponent }   from './country-details/country-detail.component';
+
+import { UserService }          from './service/user.service';
+
+import { PerfumesByNotesComponent }   from './perfume-by-notes/perfume-by-notes.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +39,11 @@ import { CountryService }          from './service/country.service';
     BrandsComponent,
     BrandDetailComponent,
     NotesComponent,
-    PerfumesAdminComponent,
+    NoteDetailComponent,
     PerfumeAddComponent,
-    BrandAddComponent,
+    CountriesComponent,
+    CountryDetailComponent,
+    PerfumesByNotesComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,9 @@ import { CountryService }          from './service/country.service';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [PerfumeService, BrandService, NoteService, NoteGroupService,CountryService],
+  providers: [PerfumeService, BrandService, NoteService, NoteGroupService,CountryService,UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ 
+ }

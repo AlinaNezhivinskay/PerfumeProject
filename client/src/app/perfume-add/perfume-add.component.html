@@ -1,6 +1,6 @@
 <div>
 	<h2>Adding perfume</h2>
-	<form (ngSubmit)="addPerfume()" #perfumeForm="ngForm">
+	<form #perfumeForm="ngForm">
 	<table>
 		<tr>
 			<td class="perfume-image">
@@ -8,7 +8,7 @@
 				<input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/jpg" (change)="imageChoosed($event)" >
 			</td>
 			<td>
-      			<label>Name:</label><input type="text" name="name" required="true" [(ngModel)]="perfume.name"><br>
+      		<label>Name:</label><input type="text" name="name" required="true" [(ngModel)]="perfume.name"><br>
 	    		<label>Release year:</label><input type="number" name="releaseYear" [(ngModel)]="perfume.releaseYear"><br>
    				<label>Type:</label>
    				<select name="type" required [(ngModel)]="perfume.type">
@@ -18,7 +18,7 @@
    				</select><br>
     			<label>Brand:</label>
     			<select name="brand" required [(ngModel)]="perfume.brand">
-   					<option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+   					<option *ngFor="let brand of brands" [ngValue]="brand">{{brand.name}}</option>
    				</select>
     			<br>
 			</td>
@@ -29,24 +29,92 @@
 				<p>This perfume is most suitable under the following conditions:</p>
 				<img src="./assets/weather.jpg" class="icon">
 				<label>Weather condition:</label>
-				<select name="weather" required [(ngModel)]="perfume.weather">
+				<select name="weather" required [(ngModel)]="perfume.condition.weather">
    					<option value="CLEAR">Clear</option>
    					<option value="OVERCAST">Overcast</option>
    					<option value="PRECIPITATION">Precipitation</option>
    					<option value="ANY">Any</option>
    				</select><br>
 				<img src="./assets/temperatura.jpg" class="icon">
-				<label>Temperature:</label><input type="number" name="releaseYear" min="-30" max="30" [(ngModel)]="perfume.temperature"><br>
+				<label>Temperature:</label><input type="number" name="releaseYear" min="-30" max="30" [(ngModel)]="perfume.condition.temperature"><br>
 				<img src="./assets/daytime.jpg" class="icon">
     			<label>Daytime:</label>
-    			<select name="daytime" required [(ngModel)]="perfume.daytime">
+    			<select name="daytime" required [(ngModel)]="perfume.condition.daytime">
    					<option value="DAY">Day</option>
    					<option value="EVENING">Evening</option>
    					<option value="ANY">Any</option>
    				</select><br>
     		</td>
 		</tr>
+		<h2>Note Pyramide:</h2>
+		<tr>
+			<td>
+				 <div class="row" style="width: 100%; padding-bottom: 1%;">
+    					<a href="#" data-target="#addNoteModal" data-toggle="modal"><button type="button" class="btn btn-outline-dark">+</button></a>
+ 				</div>
+			<table>
+				<tr>
+					<th>Id</th>
+  					<th>Image</th>
+  					<th>Name</th>
+  					<th>Type</th>
+				</tr>
+				<tr *ngFor="let perfumeNote of perfume.notePyramide">
+  					<td>{{perfumeNote.note.id}}</td>
+  					<td><img src="data:image/jpg;base64,{{perfumeNote.note.image}}"></td>
+  					<td>{{perfumeNote.note.name}}</td>
+  					<td>{{perfumeNote.type}}</td>
+            <button (click)="removeNote(perfumeNote.note.id)">-</button>
+				</tr>
+			</table>
+			</td>
+		</tr>
 	</table>
-	<button type="submit">Add</button>
+	<button (click)="addPerfume()">Add</button>
+
+        <div id="addNoteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h1 class="text-center" style="color: black;">Add note</h1>
+              </div>
+              <div class="modal-body row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label  class="control-label col-lg-6 label-modal">Note:</label>
+                            <div class="col-lg-6">
+                                <select name="note" required [(ngModel)]="pyramide.note">
+                                  <option *ngFor="let pNote of notes" [ngValue]="pNote">{{pNote.name}}</option>
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    <div class="form-group">
+                    <label  class="control-label col-lg-6 label-modal">Type:</label>
+                            <div class="col-lg-6">
+                                <select name="type" required [(ngModel)]="pyramide.type">
+                                  <option value="TOP">Top</option>
+                                  <option value="HEART_NOTE">Heart note</option>
+                                  <option value="BASIC">Basic</option>
+                                 </select>
+                            </div>
+                          </div>
+                        </div>
+                   <div class="col-sm-12">
+                        <button class="btn btn-lg btn-secondary btn-block" data-dismiss="modal" aria-hidden="true"(click)="addNote()">Add</button>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                  <div class="col-md-12">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                  </div>    
+              </div>
+          </div>
+          </div>
+
+        </div>
 	</form>
 </div>
+        

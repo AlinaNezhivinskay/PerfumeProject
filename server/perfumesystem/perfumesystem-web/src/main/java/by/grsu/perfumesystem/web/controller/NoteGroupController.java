@@ -3,6 +3,8 @@ package by.grsu.perfumesystem.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,5 +42,27 @@ public class NoteGroupController {
 			System.out.print(e.getMessage());
 		}
 		return answer;
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public void addNoteGroup(@RequestBody NoteGroup noteGroup) {
+		try {
+			noteGroupService.addNoteGroup(noteGroup);
+		} catch (Exception e) {
+
+			System.out.print(e.getMessage());
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public void removeNote(@RequestBody NoteGroup noteGroup) {
+		try {
+			noteGroupService.removeNoteGroup(noteGroup);
+		} catch (Exception e) {
+
+			System.out.print(e.getMessage());
+		}
 	}
 }

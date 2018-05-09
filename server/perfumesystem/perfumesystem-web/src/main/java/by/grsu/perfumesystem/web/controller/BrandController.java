@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import by.grsu.perfumesystem.api.sevice.IBrandService;
-import by.grsu.perfumesystem.api.sevice.ICountryService;
 import by.grsu.perfumesystem.model.Brand;
-import by.grsu.perfumesystem.model.Country;
-import by.grsu.perfumesystem.web.dto.BrandDto;
 
 @RestController
 @RequestMapping("/brand")
@@ -22,9 +19,6 @@ public class BrandController {
 
 	@Autowired
 	private IBrandService brandService;
-
-	@Autowired
-	private ICountryService countryService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Brand> getBrands() {
@@ -50,13 +44,34 @@ public class BrandController {
 		return answer;
 	}
 
+	@RequestMapping(value = "/by_country", method = RequestMethod.GET)
+	public List<Brand> getBrandsByCountry(@RequestParam Integer id) {
+		List<Brand> answer = null;
+		try {
+			answer = brandService.getBrandsByCountry(id);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return answer;
+	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public void addBrand(@RequestBody BrandDto dto) {
+	public void addBrand(@RequestBody Brand brand) {
 		try {
-			Country country = countryService.getCountryById(dto.getCountry());
-			Brand brand = new Brand(dto.getName(), country, dto.getSite());
 			brandService.addBrand(brand);
+		} catch (Exception e) {
+
+			System.out.print(e.getMessage());
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public void removeBrand(@RequestBody Brand brand) {
+		try {
+			brandService.removeBrand(brand);
 		} catch (Exception e) {
 
 			System.out.print(e.getMessage());
